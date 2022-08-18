@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 
 function Table() {
-  const { planets, getPlanets } = useContext(PlanetsContext);
+  const { getPlanets, planetsFilterName } = useContext(PlanetsContext);
   useEffect(getPlanets, []);
 
   return (
@@ -26,7 +26,7 @@ function Table() {
           </tr>
         </thead>
         <tbody>
-          {planets.map((planet) => (
+          {planetsFilterName.map((planet) => (
             <tr
               key={ planet.name }
             >
