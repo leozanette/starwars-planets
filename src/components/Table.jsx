@@ -37,7 +37,7 @@ function Table() {
               <th>{ planet.population }</th>
               <th>{ planet.rotation_period }</th>
               <th>{ planet.orbital_period }</th>
-              <th>{ planet.surfacewater }</th>
+              <th>{ planet.surface_water }</th>
               <th>{ planet.diameter }</th>
               <th>{ planet.created }</th>
               <th>{ planet.films }</th>
