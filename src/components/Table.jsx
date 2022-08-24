@@ -2,8 +2,24 @@ import React, { useContext, useEffect } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 
 function Table() {
-  const { getPlanets, planetsFilterName } = useContext(PlanetsContext);
-  useEffect(getPlanets, []);
+  const { planetsFilterName, setPlanets,
+    setFilterName } = useContext(PlanetsContext);
+  useEffect(() => {
+    const getPlanets = async () => {
+      const endPoint = 'https://swapi-trybe.herokuapp.com/api/planets/';
+      const getData = await fetch(endPoint);
+      const dataPlanets = await getData.json();
+      return dataPlanets;
+    };
+
+    const filtered = async () => {
+      const { results } = await getPlanets();
+      results.forEach((a) => delete a.residents);
+      setPlanets(results);
+      setFilterName(results);
+    };
+    filtered();
+  }, []);
 
   return (
     <>
@@ -29,6 +45,7 @@ function Table() {
           {planetsFilterName.map((planet) => (
             <tr
               key={ planet.name }
+              data-testid="planets"
             >
               <th>{ planet.name }</th>
               <th>{ planet.climate }</th>

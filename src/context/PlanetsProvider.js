@@ -13,19 +13,9 @@ function PlanetsProvider({ children }) {
     ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'],
   );
 
-  const getPlanets = async () => {
-    const endPoint = 'https://swapi-trybe.herokuapp.com/api/planets/';
-    const getData = await fetch(endPoint);
-    const dataPlanets = await getData.json();
-    dataPlanets.results.forEach((a) => delete a.residents);
-    setPlanets(dataPlanets.results);
-    setFilterName(dataPlanets.results);
-  };
-
   return (
     <PlanetsContext.Provider
       value={ { planets,
-        getPlanets,
         name,
         setName,
         planetsFilterName,
@@ -34,6 +24,7 @@ function PlanetsProvider({ children }) {
         setFilterNumeric,
         columnFilters,
         setColumnFilter,
+        setPlanets,
       } }
     >
       {children}
